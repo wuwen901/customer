@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: customers
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/customer?useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true&serviceTimezone=GMT%2B8
+    username: root
+    password:
+
+  redis:
+    host: localhost
+    port: 6379
+
+server:
+  port: 8082
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+  plugin:
+    monitor-enable: true
+    update-enable: false
+  monitor:
+    timeMs: 500
+
+mapper:
+  use-simple-type: true
+  enum-as-simple-type: true
+
+pagehelper:
+  helper-dialect: mysql
+
+logging:
+  config: classpath:logback-boot.xml
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
