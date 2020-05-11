@@ -15,7 +15,7 @@ package com.wuwen.customer.infrastructure.util;
  *
  * @author wuwen
  */
-public class SnowflakeId {
+public class Snowflake {
 
     // ==============================Fields===========================================
     /**
@@ -96,7 +96,7 @@ public class SnowflakeId {
      * @param workerId     工作ID (0~31)
      * @param datacenterId 数据中心ID (0~31)
      */
-    public SnowflakeId(long workerId, long datacenterId) {
+    public Snowflake(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(
                     String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
@@ -179,7 +179,7 @@ public class SnowflakeId {
      * 测试
      */
     public static void main(String[] args) {
-        SnowflakeId idWorker = new SnowflakeId(0, 0);
+        Snowflake idWorker = new Snowflake(0, 0);
         int size = 10;
         for (int i = 0; i < size; i++) {
             long id = idWorker.nextId();
